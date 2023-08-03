@@ -1,23 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from "react"
+import "./style.css"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
-const Carousels = ({ images }) => {
-  const [currentImage, setCurrentImage] = React.useState(0);
 
-  const handleNext = () => {
-    setCurrentImage((prevImage) => (prevImage === images.length - 1 ? 0 : prevImage + 1));
-  };
 
-  const handlePrev = () => {
-    setCurrentImage((prevImage) => (prevImage === 0 ? images.length - 1 : prevImage - 1));
-  };
+const Carousels = () => {
 
-  return (
-    <div className="carousel">
-      <button onClick={handlePrev}>&lt;</button>
-      <img src={`${process.env.REACT_APP_IMAGE_BASE_URL}${images[currentImage]}`} alt="Carousel Image" />
-      <button onClick={handleNext}>&gt;</button>
-    </div>
-  );
-};
+    const [ popularMovies, setPopularMovies ] = useState([])
 
-export default Carousel;
+    useEffect(() => {
+        fetch("https://api.themoviedb.org/3/discover/movie?api_key=8644a1c8f15817cdc93d07d6ccdc34fb")
+        .then(res => res.json())
+        .then(data => setPopularMovies(data.results))
+    }, [])
+
+    return (
+        <>
+            <div className="poster">
+                <Carousel
+                    showThumbs={false}
+                    autoPlay={true}
+                    transitionTime={3}
+                    infiniteLoop={true}
+                    showStatus={false}
+                >
+                    {
+                        popularMovies.map(movie => (
+                            <div className="posterall">
+                                <div className="posterImage">
+                                    <img src={`https://image.tmdb.org/t/p/original${movie && movie.backdrop_path}`} />
+                                </div>
+                                <div className="posterImage__overlay">
+                                    <div className="posterImage__title">{movie ? movie.original_title: ""}</div>
+                                    <div className="posterImage__runtime">
+                                        {movie ? movie.release_date : ""}
+          
+                                    </div>
+                                    <div className="posterImage__description">{movie ? movie.overview : ""}</div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </Carousel>
+               
+            </div>
+        </>
+    )
+}
+
+export default Carousels;

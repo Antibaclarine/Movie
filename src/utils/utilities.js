@@ -46,3 +46,18 @@ export const getMovieDetails = async (movieId) => {
     }
   }
   
+  export const getMovieSearch = async () => {
+    try {
+      const response = await fetch(`${REACT_APP_BASE_URL}/3/search/movie`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${REACT_APP_ACCESS_TOKEN}`,
+        },
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return error.message;
+    }
+  }
+  

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getMovies } from "../../utils/utilities";
+import { getMovieSearch } from "../../utils/utilities";
 import ImageContainer from "../../atoms/Image-container";
 import "./style.css";
 
@@ -31,8 +32,10 @@ const MoviesList = () => {
     setHoveredMovie(null);
   };
 
+
+
   const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    movie.title && movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -41,13 +44,9 @@ const MoviesList = () => {
 
   return (
     <div>
-      <nav>
+      <nav className="search">
         <input type="text" placeholder="Search" onChange={handleSearch} />
       </nav>
-
-      <div className="carousel">
-        {/* Carousel code goes here */}
-      </div>
 
       <div className="image-container">
         {loading === false &&
@@ -65,7 +64,6 @@ const MoviesList = () => {
                   <h3>{item.title}</h3>
                   <p>{item.overview}</p>
                   <p>Release Date: {item.release_date}</p>
-                  <p>Rate:{item.rate}</p>
                 </div>
               )}
             </div>
