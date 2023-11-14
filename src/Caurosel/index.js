@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Carousels = () => {
 
-    const [ popularMovies, setPopularMovies ] = useState([])
+    const [ popularMovies, setPopularMovies ] = useState([]);
 
     useEffect(() => {
         fetch("https://api.themoviedb.org/3/discover/movie?api_key=8644a1c8f15817cdc93d07d6ccdc34fb")

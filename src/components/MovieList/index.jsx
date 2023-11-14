@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getMovies } from "../../utils/utilities";
-import { getMovieSearch } from "../../utils/utilities";
+// import { getMovieSearch } from "../../utils/utilities";
 import ImageContainer from "../../atoms/Image-container";
 import "./style.css";
 

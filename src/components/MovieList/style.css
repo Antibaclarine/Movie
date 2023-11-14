@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(4 ,1fr);
     gap: 2%;
+    margin: 0 auto;
 }
 .images{
     width: 90%;
@@ -28,6 +29,6 @@ body{
     display: flex;
     justify-content: flex-end;
     position: relative;
-    top: -1200px;
+    top: -850px;
     padding: 10px; 
 }
